@@ -1,0 +1,30 @@
+form {
+    width: 80%;
+}
+
+.title-form h1,
+.title-form p {
+    margin: 0;
+}
+
+.title-form {
+    margin: 0.5em 0;
+}
+
+.fields-form {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5em 0;
+}
+
+.fields-form input {
+    border: 1px rgba(0, 0, 0, 0.5) solid;
+    border-radius: 0.5em;
+    padding: 0.7em;
+}
+
+@media screen and (min-width: 1024px) {
+    form {
+        width: 60%;
+    }
+}
