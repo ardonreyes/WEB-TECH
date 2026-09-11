@@ -1,0 +1,13 @@
+.description-about {
+    width: 100%;
+    margin: 1em 0;
+}
+
+.description-about h1 {
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.description-about p {
+    font-size: 0.9em;
+}

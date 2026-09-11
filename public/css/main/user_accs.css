@@ -1,0 +1,20 @@
+:root {
+    --card-border: 1px rgba(0, 0, 0, 0.5) solid;
+}
+
+.customer-node {
+    background-color: white;
+    border: var(--card-border);
+    border-radius: 1em;
+    padding: 1em;
+    margin-top: 1em;
+}
+
+.customer-node h1 {
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.customer-node p {
+    font-size: 0.9em;
+}

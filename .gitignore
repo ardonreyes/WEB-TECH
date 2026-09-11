@@ -48,6 +48,13 @@ $RECYCLE.BIN/
 .web-tech.rn.conf
 Vagrantfile
 
+LICENSE
+phpunit.dist.xml
+preload.php
+README.md
+builds
+tests/
+
 #-------------------------
 # Temporary Files
 #-------------------------

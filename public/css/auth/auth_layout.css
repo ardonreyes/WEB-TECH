@@ -9,7 +9,7 @@ footer {
     margin: 1em;
 }
 
-body {
+* {
     display: flex;
     padding: 0;
     margin: 0;
