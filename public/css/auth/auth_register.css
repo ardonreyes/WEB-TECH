@@ -30,6 +30,14 @@ form {
     padding: 0.7em;
 }
 
+.submit-btn {
+    transition: all 50ms;
+}
+
+.submit-btn:hover {
+    scale: calc(1.005);
+}
+
 @media screen and (min-width: 800px) {
     .fields-name {
         flex-direction: row;

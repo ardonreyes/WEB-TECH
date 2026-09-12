@@ -1,6 +1,9 @@
 .description-about {
     width: 100%;
     margin: 1em 0;
+    max-width: 1000px;
+    justify-self: center;
+    text-align: center;
 }
 
 .description-about h1 {

@@ -36,7 +36,7 @@ class Auth extends BaseController
     public function forgetPage(): string 
     {
         return view('pages/auth/auth_forget', [
-            'title' => $this->metadata['titles'][1],
+            'title' => $this->metadata['titles'][2],
             'stylesheet' => $this->metadata['css'][3],
             'layout' => $this->metadata['css'][1]
         ]);

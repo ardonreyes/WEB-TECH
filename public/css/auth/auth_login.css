@@ -5,7 +5,7 @@
     --box-shadow: 0 0 0.1em 0.1em rgba(0, 0, 0, 0.185);
 }
 
-* {
+body {
     display: flex;
     font-family: "Poppins", sans-serif;
     font-style: normal;
@@ -74,11 +74,16 @@ form {
 }
 
 form a {
-    text-align: end;
+    align-self: end;
     text-decoration: none;
     color: black;
     margin-top: 0.4em;
     margin-bottom: 1em;
+    transition: all 100ms;
+}
+
+form a:hover {
+    font-weight: 500;
 }
 
 .navigation-btn {
@@ -94,14 +99,22 @@ form a {
     background-color: var(--brown);
     color: white;
     font-size: 1em;
+    transition: all 100ms;
 }
 
 .register-btn {
-    padding: 0.5em;
+    padding: 0.5em 0;
+    width: 99.7%;
     border-radius: 0.5em;
     border: 1px rgba(0, 0, 0, 0.5) solid;
     background-color: transparent;
     text-align: center;
+    transition: all 100ms;
+}
+
+.register-btn:hover,
+.submit-btn:hover {
+    scale: calc(1.01);
 }
 
 footer {

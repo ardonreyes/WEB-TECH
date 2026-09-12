@@ -10,7 +10,7 @@
             <p>Understand about our system.</p>
         </div>
         <div class="icon-titles-dashboard">
-            <button>≡≡</button>
+            <button id='open-nav'>≡≡</button>
         </div>
     </div>
 

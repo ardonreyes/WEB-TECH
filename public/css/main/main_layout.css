@@ -54,6 +54,12 @@ nav {
 .links-nav a {
     text-decoration: none;
     color: white;
+    transition: all 50ms;
+}
+
+.links-nav a:hover {
+    scale: calc(1.1);
+    font-weight: 600;
 }
 
 .close-nav {
@@ -72,6 +78,10 @@ nav {
     width: 100%;
     position: fixed;
     z-index: 1;
+}
+
+body.block-scroll {
+    overflow: hidden;
 }
 
 section {

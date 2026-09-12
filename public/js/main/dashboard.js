@@ -6,11 +6,13 @@ const openBtn = document.getElementById('open-nav')
 openBtn.addEventListener('click', () => {
     navBar.setAttribute('style', 'display: flex;')
     uiBackdropFilter.setAttribute('style', 'display: block;')
+    document.body.classList.add('block-scroll')
 })
 
 closeBtn.addEventListener('click', () => {
     navBar.setAttribute('style', 'display: none;')
     uiBackdropFilter.setAttribute('style', 'display: none;')
+    document.body.classList.remove('block-scroll')
 })
 
 window.addEventListener('resize', () => {

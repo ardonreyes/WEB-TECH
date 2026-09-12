@@ -37,10 +37,10 @@ $this->section('content');
         <h1>Quick Actions</h1>
         <div class="cards-action-home">
             <div class="cards-home quick-action-btn">
-                <a href="http://">Customers</a>
+                <a href="<?= site_url('/customers') ?>">Customers</a>
             </div>
             <div class="cards-home quick-action-btn">
-                <a href="http://">Users</a>
+                <a href="<?= site_url('/customers') ?>">Users</a>
             </div>
         </div>
     </div>

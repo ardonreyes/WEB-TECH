@@ -5,34 +5,55 @@
 .cards-data-home {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 2fr);
     gap: 0.5em;
     margin: 1em 0;
 }
 
 .cards-home {
+    display: flex;
+    flex-direction: column;
     background-color: white;
     padding: 0.5em 1em;
     border: var(--card-border);
     border-radius: 1em;
+    height: 8vh;
+    justify-content: center;
+}
+
+.quick-action-btn {
+    text-align: center;
+    height: 3vh;
+    padding: 0;
+    min-height: 6vh;
+    transition: all 100ms;
+}
+
+.quick-action-btn:hover {
+    scale: calc(1.03);
 }
 
 .cards-home h1 {
-    font-size: 0.8em;
+    font-size: 1em;
     font-weight: 600;
+}
+
+.cards-home p {
+    font-size: 0.9em;
 }
 
 .quick-action {
     width: 100%;
     display: grid;
     grid-template-rows: repeat(2, 1fr);
-    margin: 2em 0;
 }
 
 .quick-action h1 {
     font-size: 1.1em;
     margin-left: 0.2em;
     font-weight: 600;
+    align-self: flex-end;
+    margin-bottom: 0.5em;
 }
 
 .cards-action-home {
@@ -46,4 +67,22 @@
     color: black;
     font-weight: 600;
     font-size: 0.8em;
+    width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+    .cards-data-home {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .cards-action-home {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .quick-action-btn {
+        min-width: 180px;
+    }
 }

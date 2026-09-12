@@ -10,7 +10,7 @@
             <p>Registered users in our system.</p>
         </div>
         <div class="icon-titles-dashboard">
-            <button>≡≡</button>
+            <button id='open-nav'>≡≡</button>
         </div>
     </div>
     
