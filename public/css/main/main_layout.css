@@ -17,6 +17,10 @@ body {
     min-height: 100vh;
 }
 
+.customer-node p {
+    overflow-wrap: anywhere;
+}
+
 nav {
     background-color: var(--brown);
     width: 70%;
@@ -116,10 +120,12 @@ section {
     line-height: 0.6em;
     width: auto;
     font-size: 1.5em;
-    letter-spacing: -0.1em;
+    letter-spacing: -0.25em !important;
     border: none;
     margin-right: 0.2em;
     cursor: pointer;
+    color: black;
+    background: transparent !important;
 }
 
 footer {

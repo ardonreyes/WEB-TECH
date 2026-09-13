@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav id='dashboard-nav'>
-        <button class="close-nav" id='close-nav'>X</button>
+        <button class="close-nav" id='close-nav'>✕</button>
         <div class="title-container-nav">
             <h1 class="title-nav">XYZ POS</h1>
         </div>
