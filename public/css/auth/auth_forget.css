@@ -33,6 +33,6 @@ form {
 
 @media screen and (min-width: 1024px) {
     form {
-        width: 60%;
+        width: 50%;
     }
 }

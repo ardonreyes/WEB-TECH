@@ -140,4 +140,8 @@ footer {
         padding-left: 1.5rem;
         border-radius: 0.2rem 0 0 0.2rem;
     }
+
+    .logo-login {
+        opacity: 0;
+    }
 }
