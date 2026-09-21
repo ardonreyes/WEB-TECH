@@ -16,8 +16,8 @@
     
     <?php foreach($data as $key): ?>
         <div class="customer-node">
-            <h1><?= esc(ucwords($key['first_name'].' '.$key['last_name'])) ?></h1>
-            <p><?= esc($key['email']) ?></p>
+            <h1><?= esc($key['full_name']) ?></h1>
+            <p><?= esc($key['username']) ?></p>
             <p><?= esc($key['role']) ?></p>
         </div>
     <?php endforeach ?>
