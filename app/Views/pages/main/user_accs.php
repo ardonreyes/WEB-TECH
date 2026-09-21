@@ -14,18 +14,13 @@
         </div>
     </div>
     
-    <?php 
-        for($i = 0; $i < 5; $i++){
-            echo "
-                    <div class=\"customer-node\">
-                        <h1>{$data[$i][0]}</h1>
-                        <p>{$data [$i][3]}</p>
-                        <p>{$data [$i][4]}</p>
-                    </div>
-                ";
-        }
-    ?>
-
+    <?php foreach($data as $key): ?>
+        <div class="customer-node">
+            <h1><?= esc(ucwords($key['first_name'].' '.$key['last_name'])) ?></h1>
+            <p><?= esc($key['email']) ?></p>
+            <p><?= esc($key['role']) ?></p>
+        </div>
+    <?php endforeach ?>
 </div>
 
 

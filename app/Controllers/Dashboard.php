@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\UserModel;
+
 class Dashboard extends BaseController
 {
     private $metadata = [
@@ -21,44 +23,6 @@ class Dashboard extends BaseController
         'js' => [
             'js/main/dashboard.js',
         ]
-    ];
-
-    protected $data = [
-        [
-            'Ardon Reyes',
-            '@ardonreyes',
-            '123-456-7891',
-            'ardon.reyes@gmail.com',
-            'Admin'
-        ],
-        [
-            'Samantha Ching',
-            '@samanthaching',
-            '123-456-7891',
-            'samantha.ching@gmail.com',
-            'Admin'
-        ],
-        [
-            'Carl Eugenio',
-            '@carleugenio',
-            '123-456-7891',
-            'carl.eugenio@gmail.com',
-            'User'
-        ],
-        [
-            'Ayeza Arcilla',
-            '@ayezaarcilla',
-            '123-456-7891',
-            'ayeza.arcilla@gmail.com',
-            'User'
-        ],
-        [
-            'Diongeles Vanderbilt',
-            '@diongelesvanderbilt',
-            '123-456-7891',
-            'diongeles.vanderbilt@gmail.com',
-            'User'
-        ],
     ];
 
     public function home(): string
@@ -81,21 +45,25 @@ class Dashboard extends BaseController
     }
     public function customers(): string
     {
+        $userModel = new UserModel();
+
         return view('pages/main/customer_accs', [
             'titles' => $this->metadata['titles'][2],
             'stylesheet' => $this->metadata['css'][2],
             'layout' => $this->metadata['css'][4],
-            'data' => $this->data,
+            'data' => $userModel->findAll(),
             'js' => $this->metadata['js'][0],
         ]);
     }
     public function users(): string
     {
+        $userModel = new UserModel();
+        
         return view('pages/main/user_accs', [
             'titles' => $this->metadata['titles'][3],
             'stylesheet' => $this->metadata['css'][3],
             'layout' => $this->metadata['css'][4],
-            'data' => $this->data,
+            'data' => $userModel->findAll(),
             'js' => $this->metadata['js'][0],
         ]);
     }
