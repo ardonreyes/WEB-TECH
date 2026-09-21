@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\CustomerModel;
 
 class Dashboard extends BaseController
 {
@@ -45,13 +46,13 @@ class Dashboard extends BaseController
     }
     public function customers(): string
     {
-        $userModel = new UserModel();
+        $customerModel = new CustomerModel();
 
         return view('pages/main/customer_accs', [
             'titles' => $this->metadata['titles'][2],
             'stylesheet' => $this->metadata['css'][2],
             'layout' => $this->metadata['css'][4],
-            'data' => $userModel->findAll(),
+            'data' => $customerModel->findAll(),
             'js' => $this->metadata['js'][0],
         ]);
     }
