@@ -15,7 +15,7 @@ use CodeIgniter\Router\RouteCollection;
 // $routes->post('/', 'Auth:forget');
 
 # Dashboard Section
-$routes->get('/home', 'Dashboard::home');
+$routes->get('/', 'Dashboard::home');
 $routes->get('/about', 'Dashboard::about');
 $routes->get('/customers', 'Dashboard::customers');
 $routes->get('/users', 'Dashboard::users');
