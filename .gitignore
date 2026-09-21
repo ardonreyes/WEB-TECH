@@ -47,9 +47,12 @@ $RECYCLE.BIN/
 .test.test.conf
 .web-tech.rn.conf
 Vagrantfile
-/public/css/auth/
-/app/Views/layouts/auth_layout.php
-/app/Views/pages/auth/
+
+# Auth pages
+public/css/auth/*
+app/Views/layouts/auth_layout.php
+app/Views/pages/auth/*
+app/Controllers/Auth.php
 
 LICENSE
 phpunit.dist.xml
