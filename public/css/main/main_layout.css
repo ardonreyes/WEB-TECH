@@ -10,6 +10,7 @@
     font-style: normal;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -26,12 +27,25 @@ nav {
     width: 70%;
     margin: 0;
     min-height: 100vh;
-    display: none;
+    min-height: 100dvh;
+    display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 2;
     position: fixed;
+    top: 0;
     right: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(100%);
+    box-shadow: -12px 0 30px rgba(0, 0, 0, 0.18);
+    transition: transform 220ms ease, visibility 220ms;
+}
+
+nav.nav-open {
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
 }
 
 .title-container-nav {
@@ -58,7 +72,26 @@ nav {
 .links-nav a {
     text-decoration: none;
     color: white;
-    transition: all 50ms;
+    opacity: 0;
+    transform: translateX(12px);
+    transition: opacity 160ms ease, transform 160ms ease, font-weight 50ms;
+}
+
+nav.nav-open .links-nav a {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+nav.nav-open .links-nav a:nth-child(2) {
+    transition-delay: 35ms;
+}
+
+nav.nav-open .links-nav a:nth-child(3) {
+    transition-delay: 70ms;
+}
+
+nav.nav-open .links-nav a:nth-child(4) {
+    transition-delay: 105ms;
 }
 
 .links-nav a:hover {
@@ -73,15 +106,29 @@ nav {
     background-color: transparent;
     color: white;
     border: none;
+    cursor: pointer;
 }
 
 .ui-backdrop {
-    display: none;
-    backdrop-filter: blur(10px);
+    display: block;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
     height: 100vh;
+    min-height: 100dvh;
     width: 100%;
     position: fixed;
+    inset: 0;
     z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 220ms ease, visibility 220ms;
+}
+
+.ui-backdrop.show-nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 body.block-scroll {
@@ -113,19 +160,46 @@ section {
 }
 
 .titles-dashboard h1 {
-    margin: -0.3em 0;
+    margin: -0.1em 0;
 }
 
-.icon-titles-dashboard button {
-    line-height: 0.6em;
-    width: auto;
-    font-size: 1.5em;
-    letter-spacing: -0.25em !important;
-    border: none;
-    margin-right: 0.2em;
-    cursor: pointer;
+.icon-titles-dashboard {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.icon-titles-dashboard a {
+    text-decoration: none;
     color: black;
-    background: transparent !important;
+    margin-left: 0.3em;
+}
+
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.3em;
+    border: none;
+    background-color: transparent;
+    color: black;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#new-form-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 100ms;
+}
+
+#new-form-btn:hover {
+    transform: scale(1.1);
 }
 
 footer {
@@ -158,23 +232,347 @@ footer {
 .socs-link-footer a {
     text-decoration: none;
     color: white;
+    transition: all 100ms;
 }
+
+.socs-link-footer a:hover {
+    color: rgb(213, 213, 213);
+}
+
+#new-form-btn,
+.edit-form-btn {
+    color: black;
+    cursor: pointer;
+    transition: all 100ms;
+}
+
+.edit-form-btn,
+.delete-form-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.delete-form-btn:hover,
+.edit-form-btn:hover {
+    scale: calc(1.1);
+}
+
+.delete-form-btn {
+    color: rgb(248, 72, 72);
+}
+
+.customer-edit {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.8rem;
+    display: flex;
+    gap: 0.5em;
+}
+
+.ui-modal-backdrop {
+    width: 100%;
+    height: 100vh;
+    min-height: 100dvh;
+    position: fixed;
+    z-index: 10;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 100ms, visibility 100ms;
+}
+
+.ui-modal-backdrop.show-modal {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-panel {
+    position: relative;
+    background-color: white;
+    width: 100%;
+    max-width: 650px;
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 0.5em;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2);
+    transform: translateY(8px) scale(0.98);
+    transition: transform 150ms ease;
+}
+
+.ui-modal-backdrop.show-modal .modal-panel {
+    transform: translateY(0) scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    background-color: transparent;
+    color: rgb(44, 44, 44);
+    cursor: pointer;
+}
+
+.delete-modal {
+    max-width: 500px;
+    padding: 1.5rem;
+    overflow: visible;
+    text-align: center;
+}
+
+.delete-modal-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background-color: rgb(255, 235, 235);
+    color: rgb(210, 45, 45);
+    font-size: 1.1rem;
+}
+
+.delete-modal h1 {
+    margin-bottom: 0.4rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.delete-modal p {
+    color: rgb(105, 105, 105);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.delete-modal-actions,
+.form-confirm-modal-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.delete-modal-actions button,
+.form-confirm-modal-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    width: 100%;
+    min-height: 42px;
+    padding: 0.7rem 1rem;
+    border: none;
+    border-radius: 0.5em;
+    color: white;
+    cursor: pointer;
+    transition: transform 100ms ease, filter 100ms ease;
+}
+
+.delete-modal-actions button:hover,
+.form-confirm-modal-actions button:hover {
+    filter: brightness(95%);
+    transform: translateY(-1px);
+}
+
+.cancel-btn {
+    background-color: rgb(44, 44, 44);
+    cursor: pointer;
+}
+
+.delete-btn {
+    background-color: red;
+    cursor: pointer;
+}
+
+.form-confirm-backdrop {
+    z-index: 20;
+}
+
+.form-confirm-modal {
+    max-width: 500px;
+    padding: 1.5rem;
+    overflow: visible;
+    text-align: center;
+}
+
+.form-confirm-modal-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background-color: rgb(235, 246, 238);
+    color: rgb(35, 130, 70);
+    font-size: 1.1rem;
+}
+
+.form-confirm-modal h1 {
+    margin-bottom: 0.4rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.form-confirm-modal p {
+    color: rgb(105, 105, 105);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.form-confirm-submit {
+    background-color: rgb(35, 130, 70);
+}
+
+.form-modal {
+    padding: 2rem 1rem 1rem;
+}
+
+.form-modal-title {
+    margin-bottom: 1.5rem;
+    padding-right: 2rem;
+    font-size: 1.25rem;
+}
+
+.modal-form {
+    display: grid;
+    width: 100%;
+    gap: 1.25rem;
+}
+
+.modal-form-field {
+    display: grid;
+    grid-template-columns: minmax(80px, 100px) minmax(0, 1fr);
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.modal-form-field input {
+    width: 100%;
+    min-width: 0;
+    padding: 1em;
+    border: 1px solid gray;
+    border-radius: 0.5em;
+}
+
+.modal-form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-submit {
+    width: 100%;
+    padding: 1em;
+    border: none;
+    border-radius: 0.5em;
+    background-color: rgb(44, 44, 44);
+    color: white;
+    cursor: pointer;
+}
+
+.form-modal .error-container,
+.form-modal .success-container {
+    width: 100%;
+    margin: 0 0 1rem;
+}
+
+.form-modal .profile-picker {
+    position: relative;
+    display: block;
+    width: 150px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: rgb(225, 225, 225);
+    box-shadow: 0 0 0 1px rgb(175, 175, 175), 0 8px 24px rgba(0, 0, 0, 0.14);
+    cursor: pointer;
+}
+
+.form-modal .profile-picker img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 150ms ease, filter 150ms ease;
+}
+
+.form-modal .profile-picker-overlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 0.45);
+    color: white;
+    font-size: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms ease;
+}
+
+.form-modal .profile-picker input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.form-modal .profile-picker:hover img,
+.form-modal .profile-picker:focus-within img {
+    transform: scale(1.01);
+    filter: brightness(75%);
+}
+
+.form-modal .profile-picker:hover .profile-picker-overlay,
+.form-modal .profile-picker:focus-within .profile-picker-overlay {
+    opacity: 1;
+}
+
 
 @media screen and (min-width: 1024px) {
     nav {
-        display: flex;
         width: 20%;
         left: 0;
         right: auto;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(0);
+        box-shadow: none;
+        transition: none;
+    }
+
+    .links-nav a {
+        opacity: 1;
+        transform: translateX(0);
     }
 
     section {
         width: 80%;
-        position: absolute;
-        right: 0;
+        margin-left: 20%;
     }
 
-    .icon-titles-dashboard {
+    .nav-btn {
         display: none;
     }
 
@@ -184,5 +582,44 @@ footer {
 
     .close-nav {
         display: none;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .form-modal {
+        padding: 2rem;
+    }
+
+    .modal-submit {
+        width: auto;
+        min-width: 120px;
+    }
+
+    .form-modal .profile-picker {
+        width: 170px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .titles-dashboard {
+        font-size: 0.8em;
+    }
+
+    .description-about h1 {
+        font-size: 1.3em;
+    }
+
+    .description-about p {
+        font-size: 0.7em;
+        letter-spacing: 0.05em;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    nav,
+    .ui-backdrop,
+    .links-nav a {
+        transition: none;
     }
 }

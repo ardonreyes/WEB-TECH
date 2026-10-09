@@ -4,14 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class UserModel extends BaseModel
 {
     protected $table = "users";
     protected $primaryKey = "id";
 
     protected $allowedFields = [
+        'id',   
         'username',
         'full_name',
-        'role'
+        'profile'
     ];
 }
