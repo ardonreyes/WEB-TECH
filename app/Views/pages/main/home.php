@@ -10,7 +10,7 @@ $this->section('content');
             <p>Welcome, manage your POS.</p>
         </div>
         <div class="icon-titles-dashboard">
-            <button id='open-nav'>≡≡</button>
+            <button type="button" id="open-nav" class="nav-btn" aria-label="Open navigation" aria-controls="dashboard-nav" aria-expanded="false"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
         </div>
     </div>
 
@@ -24,12 +24,12 @@ $this->section('content');
             <p>None</p>
         </div>
         <div class="cards-home">
-            <h1>Users:</h1>
-            <p>5</p>
+            <h1>Customers:</h1>
+            <p><?= esc($data['customers']) ?></p>
         </div>
         <div class="cards-home">
-            <h1>Customers:</h1>
-            <p>5</p>
+            <h1>Users:</h1>
+            <p><?= esc($data['users']) ?></p>
         </div>
     </div>
     
@@ -37,10 +37,10 @@ $this->section('content');
         <h1>Quick Actions</h1>
         <div class="cards-action-home">
             <div class="cards-home quick-action-btn">
-                <a href="<?= site_url('/customers') ?>">Customers</a>
+                <a href="<?= site_url('/customers') ?>"><i class="fa-solid fa-users"></i>   Customers</a>
             </div>
             <div class="cards-home quick-action-btn">
-                <a href="<?= site_url('/customers') ?>">Users</a>
+                <a href="<?= site_url('/customers') ?>"><i class="fa-solid fa-user-group"></i> Users</a>
             </div>
         </div>
     </div>

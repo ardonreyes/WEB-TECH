@@ -7,14 +7,71 @@
     border: var(--card-border);
     border-radius: 0.5em;
     padding: 1em;
-    margin-top: 1em;
+    position: relative;
+    width: 100%;
 }
 
 .customer-node h1 {
-    font-size: 1em;
+    font-size: clamp(0.8em, 3vw, 0.9em);
     font-weight: 600;
 }
 
 .customer-node p {
-    font-size: 0.9em;
+    font-size: clamp(0.7em, 3vw, 0.8em);
+}
+
+.container-dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.8em;
+    margin-bottom: 1em;
+}
+
+.error-container,
+.success-container {
+    width: 100%;
+    background-color: rgb(39, 227, 80);
+    padding: 1em;
+    border-radius: 0.5rem;
+    display: block;
+    color: white;
+    border: 1px solid gray;
+}
+
+.error-container {
+    background-color: rgb(255, 52, 52);
+}
+
+.msg-feedback {
+    text-align: center;
+    white-space: pre-line;
+}
+
+.container-accs-feedback {
+    width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+    .container-dashboard {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .container-accs-feedback,
+    .titles-container-dashboard {
+        grid-column: 1/-1;
+    }
+
+    .error-container,
+    .success-container {
+        width: 50%;
+    }
+
+    .container-accs-feedback {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
