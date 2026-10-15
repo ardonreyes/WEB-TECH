@@ -49,10 +49,13 @@ $RECYCLE.BIN/
 Vagrantfile
 
 # Auth pages
-public/css/auth/*
+public/css/auth/auth_forget.css
+public/css/auth/auth_register.css
+public/css/auth/auth_layout.css
 app/Views/layouts/auth_layout.php
-app/Views/pages/auth/*
-app/Controllers/Auth.php
+app/Views/pages/auth/auth_forget.php
+app/Views/pages/auth/auth_register.php
+app/Views/pages/auth/auth_layout.php
 
 LICENSE
 phpunit.dist.xml
@@ -60,6 +63,7 @@ preload.php
 README.md
 builds
 tests/
+writable/
 
 #-------------------------
 # Temporary Files

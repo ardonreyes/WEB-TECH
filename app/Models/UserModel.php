@@ -12,6 +12,7 @@ class UserModel extends BaseModel
     protected $allowedFields = [
         'id',   
         'username',
+        'password',
         'full_name',
         'profile'
     ];

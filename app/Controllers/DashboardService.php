@@ -6,112 +6,74 @@ class DashboardService extends Dashboard {
 
     private DashboardValidation $dashboardValidation;
 
-    #temp metadata for feedback--upto module 3 restrictions
-    private $metadata = [
-            'titles' => [
-                'Dashboard',
-                'About',
-                'Customers',
-                'Users',
-                'Customer Edit'
-            ],
-            'css' => [
-                'css/main/home.css',
-                'css/main/about.css',
-                'css/main/customer_accs.css',
-                'css/main/user_accs.css',
-                'css/main/main_layout.css',
-                'css/main/customer_edit.css',
-            ],
-            'js' => [
-                'js/main/dashboard.js',
-            ]
-        ];
-
     public function __construct() {
         parent::__construct();
         $this->dashboardValidation = new DashboardValidation();
     }
 
     public function insertCustomerData () {
-        $request = $this->request->getPost();
+        if (session()->get('status') !== true) {
+            return redirect()->to('/');
+        }
+
+        $request = $this->request->getPost(['full_name', 'email', 'phone']);
 
         if (!$this->dashboardValidation->validationCustomerForInsertAndUpdate($request)){
-            return view('pages/main/customer_accs', [
-                'titles' => $this->metadata['titles'][2],
-                'stylesheet' => $this->metadata['css'][2],
-                'layout' => $this->metadata['css'][4],
-                'data' => $this->customerModel->getAll(),
+            return redirect()->to('/customers')->with('customerFeedback', [
+                'messages' => $this->dashboardValidation->errorMsg(),
                 'formData' => $request,
                 'openModal' => 'customer-add-modal',
-                'js' => $this->metadata['js'][0],
-                'messages' => $this->dashboardValidation->errorMsg(),
-            ]);
+            ])->withCookies();
         }
 
         $this->customerModel->insertAnAccount($request);
-        return view('pages/main/customer_accs', [
-            'titles' => $this->metadata['titles'][2],
-            'stylesheet' => $this->metadata['css'][2],
-            'layout' => $this->metadata['css'][4],
-            'data' => $this->customerModel->getAll(),
-            'js' => $this->metadata['js'][0],
+        return redirect()->to('/customers')->with('customerFeedback', [
             'messages' => ["success" =>"Successfully added account."],
-        ]);
+        ])->withCookies();
     }
 
     public function updateCustomerData (int $id) {
-        $request = $this->request->getPost();
+        if (session()->get('status') !== true) {
+            return redirect()->to('/');
+        }
+        $request = $this->request->getPost(['full_name', 'email', 'phone']);
 
         if (!$this->dashboardValidation->validationCustomerForInsertAndUpdate($request, $id)){
-            return view('pages/main/customer_accs', [
-                'titles' => $this->metadata['titles'][2],
-                'stylesheet' => $this->metadata['css'][2],
-                'layout' => $this->metadata['css'][4],
-                'data' => $this->customerModel->getAll(),
+            return redirect()->to('/customers')->with('customerFeedback', [
+                'messages' => $this->dashboardValidation->errorMsg(),
                 'formData' => $request,
                 'openModal' => 'customer-edit-modal-' . $id,
-                'js' => $this->metadata['js'][0],
-                'messages' => $this->dashboardValidation->errorMsg(),
-            ]);
+            ])->withCookies();
         }
 
         $this->customerModel->updateAnAccount($id, $request);
-        return view('pages/main/customer_accs', [
-            'titles' => $this->metadata['titles'][2],
-            'stylesheet' => $this->metadata['css'][2],
-            'layout' => $this->metadata['css'][4],
-            'data' => $this->customerModel->getAll(),
-            'js' => $this->metadata['js'][0],
+        return redirect()->to('/customers')->with('customerFeedback', [
             'messages' => ["success" =>"Successfully updated information."],
-        ]);
+        ])->withCookies();
     }
 
     public function deleteCustomerData (int $id) {
+        if (session()->get('status') !== true) {
+            return redirect()->to('/');
+        }
 
         if (!$id) {
-            return view('pages/main/customer_accs', [
-                'titles' => $this->metadata['titles'][2],
-                'stylesheet' => $this->metadata['css'][2],
-                'layout' => $this->metadata['css'][4],
-                'data' => $this->customerModel->getAll(),
-                'js' => $this->metadata['js'][0],
+            return redirect()->to('/customers')->with('customerFeedback', [
                 'messages' => ["Account was not deleted.\nSomething went wrong."],
-            ]);
+            ])->withCookies();
         }
 
         $this->customerModel->delete($id);
-        return view('pages/main/customer_accs', [
-            'titles' => $this->metadata['titles'][2],
-            'stylesheet' => $this->metadata['css'][2],
-            'layout' => $this->metadata['css'][4],
-            'data' => $this->customerModel->getAll(),
-            'js' => $this->metadata['js'][0],
+        return redirect()->to('/customers')->with('customerFeedback', [
             'messages' => ["success" => "Successfully deleted."],
-        ]);
+        ])->withCookies();
     }
 
     public function insertUserData () {
+        if (session()->get('status') !== true) {
+            return redirect()->to('/');
+        }
+
         $request = [
             'full_name' => $this->request->getPost('full_name'),
             'username' => $this->request->getPost('username'),
@@ -120,16 +82,11 @@ class DashboardService extends Dashboard {
         $profile = $this->request->getFile('profile');
 
         if (!$this->dashboardValidation->validationUserForInsertAndUpdate($request)){
-            return view('pages/main/user_accs', [
-                'titles' => $this->metadata['titles'][3],
-                'stylesheet' => $this->metadata['css'][3],
-                'layout' => $this->metadata['css'][4],
-                'data' => $this->userModel->getAll(),
+            return redirect()->to('/users')->with('userFeedback', [
+                'messages' => $this->dashboardValidation->errorMsg(),
                 'formData' => $request,
                 'openModal' => 'user-add-modal',
-                'js' => $this->metadata['js'][0],
-                'messages' => $this->dashboardValidation->errorMsg(),
-            ]);
+            ])->withCookies();
         }
 
         if ($profile !== null && $profile->isValid() && ! $profile->hasMoved()) {
@@ -144,17 +101,16 @@ class DashboardService extends Dashboard {
         }
 
         $this->userModel->insertAnAccount($request);
-        return view('pages/main/user_accs', [
-            'titles' => $this->metadata['titles'][3],
-            'stylesheet' => $this->metadata['css'][3],
-            'layout' => $this->metadata['css'][4],
-            'data' => $this->userModel->getAll(),
-            'js' => $this->metadata['js'][0],
+        return redirect()->to('/users')->with('userFeedback', [
             'messages' => ["success" =>"Successfully added account."],
-        ]);
+        ])->withCookies();
     }
 
     public function updateUserData (int $id) {
+        if (session()->get('status') !== true) {
+            return redirect()->to('/');
+        }
+        
         $request = [
             'full_name' => $this->request->getPost('full_name'),
             'username' => $this->request->getPost('username'),
@@ -165,16 +121,11 @@ class DashboardService extends Dashboard {
         $newProfilePath = null;
 
         if (!$this->dashboardValidation->validationUserForInsertAndUpdate($request, $id)){
-            return view('pages/main/user_accs', [
-                'titles' => $this->metadata['titles'][3],
-                'stylesheet' => $this->metadata['css'][3],
-                'layout' => $this->metadata['css'][4],
-                'data' => $this->userModel->getAll(),
+            return redirect()->to('/users')->with('userFeedback', [
+                'messages' => $this->dashboardValidation->errorMsg(),
                 'formData' => $request,
                 'openModal' => 'user-edit-modal-' . $id,
-                'js' => $this->metadata['js'][0],
-                'messages' => $this->dashboardValidation->errorMsg(),
-            ]);
+            ])->withCookies();
         }
 
         if ($profile !== null && $profile->isValid() && ! $profile->hasMoved()) {
@@ -196,16 +147,11 @@ class DashboardService extends Dashboard {
 
             unset($request['profile']);
 
-            return view('pages/main/user_accs', [
-                'titles' => $this->metadata['titles'][3],
-                'stylesheet' => $this->metadata['css'][3],
-                'layout' => $this->metadata['css'][4],
-                'data' => $this->userModel->getAll(),
+            return redirect()->to('/users')->with('userFeedback', [
+                'messages' => ["Account was not updated.\nSomething went wrong."],
                 'formData' => $request,
                 'openModal' => 'user-edit-modal-' . $id,
-                'js' => $this->metadata['js'][0],
-                'messages' => ["Account was not updated.\nSomething went wrong."],
-            ]);
+            ])->withCookies();
         }
 
         if ($newProfilePath !== null) {
@@ -228,37 +174,25 @@ class DashboardService extends Dashboard {
             }
         }
 
-        return view('pages/main/user_accs', [
-            'titles' => $this->metadata['titles'][3],
-            'stylesheet' => $this->metadata['css'][3],
-            'layout' => $this->metadata['css'][4],
-            'data' => $this->userModel->getAll(),
-            'js' => $this->metadata['js'][0],
+        return redirect()->to('/users')->with('userFeedback', [
             'messages' => ["success" =>"Successfully updated information."],
-        ]);
+        ])->withCookies();
     }
 
     public function deleteUserData (int $id) {
+        if (session()->get('status') !== true) {
+            return redirect()->to('/');
+        }
 
         if (!$id) {
-            return view('pages/main/user_accs', [
-                'titles' => $this->metadata['titles'][3],
-                'stylesheet' => $this->metadata['css'][3],
-                'layout' => $this->metadata['css'][4],
-                'data' => $this->userModel->getAll(),
-                'js' => $this->metadata['js'][0],
+            return redirect()->to('/users')->with('userFeedback', [
                 'messages' => ["Account was not deleted.\nSomething went wrong."],
-            ]);
+            ])->withCookies();
         }
 
         $this->userModel->delete($id);
-        return view('pages/main/user_accs', [
-            'titles' => $this->metadata['titles'][3],
-            'stylesheet' => $this->metadata['css'][3],
-            'layout' => $this->metadata['css'][4],
-            'data' => $this->userModel->getAll(),
-            'js' => $this->metadata['js'][0],
+        return redirect()->to('/users')->with('userFeedback', [
             'messages' => ["success" => "Successfully deleted."],
-        ]);
+        ])->withCookies();
     }
 }
