@@ -201,6 +201,12 @@ if (initialModal) {
     syncBodyScrollLock()
 }
 
+document.querySelectorAll('.error-container, .success-container').forEach((message) => {
+    setTimeout(() => {
+        message.remove()
+    }, 5000)
+})
+
 const profilePreviewUrls = new WeakMap()
 
 document.querySelectorAll('.profile-picker input[type="file"]').forEach((profileInput) => {

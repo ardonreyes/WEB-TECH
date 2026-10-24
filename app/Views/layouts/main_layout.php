@@ -18,11 +18,12 @@
         </div>
         <div class="divider-nav"></div>
         <div class="links-nav">
-            <a href="<?= site_url('/') ?>">Home</a>
+            <a href="<?= site_url('/home') ?>">Home</a>
             <a href="<?= site_url('/about') ?>">About</a>
             <a href="<?= site_url('/customers') ?>">Customers</a>
             <a href="<?= site_url('/users') ?>">Users</a>
         </div>
+        <a href="<?= site_url('/logout') ?>" class='logout-btn'><i class="fa fa-sign-out"></i></a>
     </nav>
     <div class="ui-backdrop" id="ui-backdrop-nav" aria-hidden="true"></div>
     <section>

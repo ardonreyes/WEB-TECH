@@ -2,8 +2,10 @@
     $this->extend('layouts/main_layout');
     $this->section('content');
 
-    $openModal = $openModal ?? null;
-    $formData = $formData ?? [];
+    $feedback = session()->getFlashdata('userFeedback') ?? [];
+    $messages = $feedback['messages'] ?? null;
+    $openModal = $feedback['openModal'] ?? ($openModal ?? null);
+    $formData = $feedback['formData'] ?? [];
 ?>
 
 <div class="container-dashboard">
@@ -92,6 +94,7 @@
                         id="user-add-name"
                         name="full_name"
                         value="<?= esc($openModal === 'user-add-modal' ? ($formData['full_name'] ?? '') : '', 'attr') ?>"
+                        placeholder="First Last"
                     >
                 </div>
 
@@ -102,11 +105,12 @@
                         id="user-add-username"
                         name="username"
                         value="<?= esc($openModal === 'user-add-modal' ? ($formData['username'] ?? '') : '', 'attr') ?>"
+                        placeholder="username"
                     >
                 </div>
 
                 <div class="modal-form-actions">
-                    <button type="submit" class="modal-submit">Submit</button>
+                    <button type="submit" class="modal-su bmit">Submit</button>
                 </div>
             </form>
         </div>
@@ -216,6 +220,7 @@
                             id="user-edit-name-<?= esc($key['id'], 'attr') ?>"
                             name="full_name"
                             value="<?= esc($editData['full_name'], 'attr') ?>"
+                            placeholder="First Last"
                         >
                     </div>
 
@@ -226,6 +231,7 @@
                             id="user-edit-username-<?= esc($key['id'], 'attr') ?>"
                             name="username"
                             value="<?= esc($editData['username'], 'attr') ?>"
+                            placeholder="username"
                         >
                     </div>
 

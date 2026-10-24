@@ -40,7 +40,7 @@ $this->section('content');
                 <a href="<?= site_url('/customers') ?>"><i class="fa-solid fa-users"></i>   Customers</a>
             </div>
             <div class="cards-home quick-action-btn">
-                <a href="<?= site_url('/customers') ?>"><i class="fa-solid fa-user-group"></i> Users</a>
+                <a href="<?= site_url('/users') ?>"><i class="fa-solid fa-user-group"></i> Users</a>
             </div>
         </div>
     </div>

@@ -549,6 +549,23 @@ footer {
     opacity: 1;
 }
 
+.logout-btn {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.logout-btn i {
+    transition: all 100ms;
+}
+
+.logout-btn i:hover {
+    scale: calc(1.1);
+}
+
 
 @media screen and (min-width: 1024px) {
     nav {
@@ -582,6 +599,16 @@ footer {
 
     .close-nav {
         display: none;
+    }
+
+    .logout-btn {
+        right: 0;
+        left: 1em;
+        font-size: 1.4rem;
+    }
+
+    .logout-btn i {
+        transform: scaleX(-1);
     }
 }
 

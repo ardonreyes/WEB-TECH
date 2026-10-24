@@ -2,8 +2,10 @@
     $this->extend('layouts/main_layout');
     $this->section('content');
 
-    $openModal = $openModal ?? null;
-    $formData = $formData ?? [];
+    $feedback = session()->getFlashdata('customerFeedback') ?? [];
+    $messages = $feedback['messages'] ?? null;
+    $openModal = $feedback['openModal'] ?? ($openModal ?? null);
+    $formData = $feedback['formData'] ?? [];
 ?>
 
 <div class="container-dashboard">
@@ -77,6 +79,7 @@
                         id="customer-add-name"
                         name="full_name"
                         value="<?= esc($openModal === 'customer-add-modal' ? ($formData['full_name'] ?? '') : '', 'attr') ?>"
+                        placeholder="First Last"
                     >
                 </div>
 
@@ -87,6 +90,7 @@
                         id="customer-add-email"
                         name="email"
                         value="<?= esc($openModal === 'customer-add-modal' ? ($formData['email'] ?? '') : '', 'attr') ?>"
+                        placeholder="local@domain.domain"
                     >
                 </div>
 
@@ -97,6 +101,7 @@
                         id="customer-add-phone"
                         name="phone"
                         value="<?= esc($openModal === 'customer-add-modal' ? ($formData['phone'] ?? '') : '', 'attr') ?>"
+                        placeholder="09XXXXXXXXX"
                     >
                 </div>
 
@@ -183,6 +188,7 @@
                             id="customer-edit-name-<?= esc($key['id'], 'attr') ?>"
                             name="full_name"
                             value="<?= esc($editData['full_name'], 'attr') ?>"
+                            placeholder="First Last"
                         >
                     </div>
 
@@ -193,6 +199,7 @@
                             id="customer-edit-email-<?= esc($key['id'], 'attr') ?>"
                             name="email"
                             value="<?= esc($editData['email'], 'attr') ?>"
+                            placeholder="local@domain.domain"
                         >
                     </div>
 
@@ -203,6 +210,7 @@
                             id="customer-edit-phone-<?= esc($key['id'], 'attr') ?>"
                             name="phone"
                             value="<?= esc($editData['phone'], 'attr') ?>"
+                            placeholder="09XXXXXXXXX"
                         >
                     </div>
 

@@ -34,15 +34,15 @@
 
         <div class="container-field-edit">
             <label for="">Name:</label>
-            <input type="text" value="<?= isset($data['id']) ? esc($data['full_name']) : "" ?>" name="full_name">
+            <input type="text" value="<?= isset($data['id']) ? esc($data['full_name']) : "" ?>" name="full_name" placeholder="First Last">
         </div>
         <div class="container-field-edit">
             <label for="">Email:</label>
-            <input type="email" value="<?= isset($data['id']) ? esc($data['email']) : "" ?>" name="email">
+            <input type="email" value="<?= isset($data['id']) ? esc($data['email']) : "" ?>" name="email" placeholder="local@domain.domain">
         </div>
         <div class="container-field-edit">
             <label for="">Phone:</label>
-            <input type="text" value="<?= isset($data['id']) ? esc($data['phone']) : "" ?>" name="phone">
+            <input type="text" value="<?= isset($data['id']) ? esc($data['phone']) : "" ?>" name="phone" placeholder="09XXXXXXXXX">
         </div>
         <div class="container-action-edit">
             <input type="submit" value="Submit" class="submit-btn">
